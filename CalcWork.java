@@ -39,16 +39,16 @@ public class CalcWork {
 		Scanner in;
 		int taskNum = 0;
 		
-		//для создания выходного xml-файла при вводе данных через файл
+		//Г¤Г«Гї Г±Г®Г§Г¤Г Г­ГЁГї ГўГ»ГµГ®Г¤Г­Г®ГЈГ® xml-ГґГ Г©Г«Г  ГЇГ°ГЁ ГўГўГ®Г¤ГҐ Г¤Г Г­Г­Г»Гµ Г·ГҐГ°ГҐГ§ ГґГ Г©Г«
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true); 
-	    Document resultFile = dbf.newDocumentBuilder().newDocument();
+	    	Document resultFile = dbf.newDocumentBuilder().newDocument();
 	    
-	    Element root = resultFile.createElement("fullSolution");
-	    root.setAttribute("xmlns", "http://www.javacore.ru/schemas/");
-	    resultFile.appendChild(root);
+	    	Element root = resultFile.createElement("fullSolution");
+	    	root.setAttribute("xmlns", "http://www.javacore.ru/schemas/");
+	    	resultFile.appendChild(root);
 		
-	    //определение входного потока
+	    	//Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ ГўГµГ®Г¤Г­Г®ГЈГ® ГЇГ®ГІГ®ГЄГ 
 		if (getInputFilePath().equals("EMPTY")) {
 			in = new Scanner(System.in);
 		}
@@ -63,147 +63,147 @@ public class CalcWork {
 		}
 		
 		String inputLine = new String();
-        do {
-        	//ввод очередного примера (стрка из файла либо из консоли)
-        	if (getInputFilePath().equals("EMPTY")) {
-        		System.out.println("Print new math problem in this style 'A/B + C/D' or print 'exit':");
-        		inputLine = in.nextLine();
-        	} else {
-        		if (in.hasNextLine()) {
-        			inputLine = in.nextLine();
-        		} else {
-        			break;
-        		}
-        	}
-        	inputLine = inputLine.toLowerCase();
-        	
-        	//анализ строки (exit завершает выполнение)
-        	if (getInputFilePath().equals("EMPTY") && inputLine.equals("exit")) {
-        		System.out.println("Goodbye! Thanks for using this program!");
-        		break;
-        	}
-        	else {
-        		//проверка длины строки; мин длина строки примера = 7 (A/B*C/D)
-        		inputLine = inputLine.trim();
-        		if (inputLine.length() < 7) {
-        			if (getInputFilePath().equals("EMPTY")) {
-        				System.out.println("ERROR! Wrong input, string is too short. Try again.");
-        			} else {
-        				Element item = resultFile.createElement("mathTask");
-        				item.setAttribute("ID", Integer.toString(taskNum + 1)); // int to string
-        				item.setAttribute("task", inputLine);
-        				item.setAttribute("result", "Wrong input, string is too short.");
-        				root.appendChild(item);	
-        				++taskNum;
-        			}
-        			continue;
-        		}
-        		else {
-        			//разбор строки на части (включая обработку исключений)
-        			String sU1, sD1, sU2, sD2, inputLineCopy = inputLine;
-        			long u1, d1, u2, d2;
-        			String keyMathOper;
-        			try {
-        				//разбиение строки на подстроки
-        				sU1 = inputLine.substring(0, inputLine.indexOf("/"));
-	        			inputLine = inputLine.substring(inputLine.indexOf("/") + 1);
-	        			sU1 = sU1.trim();
-	        			if (inputLine.indexOf("+") != -1) {
-	        				keyMathOper = "+";
-	        			} else if (inputLine.indexOf("-") != -1) {
-	        				keyMathOper = "-";
-	        			} else if (inputLine.indexOf("*") != -1) {
-	        				keyMathOper = "*";
+        	do {
+        	//ГўГўГ®Г¤ Г®Г·ГҐГ°ГҐГ¤Г­Г®ГЈГ® ГЇГ°ГЁГ¬ГҐГ°Г  (Г±ГІГ°ГЄГ  ГЁГ§ ГґГ Г©Г«Г  Г«ГЁГЎГ® ГЁГ§ ГЄГ®Г­Г±Г®Г«ГЁ)
+	        	if (getInputFilePath().equals("EMPTY")) {
+	        		System.out.println("Print new math problem in this style 'A/B + C/D' or print 'exit':");
+	        		inputLine = in.nextLine();
+	        	} else {
+	        		if (in.hasNextLine()) {
+	        			inputLine = in.nextLine();
+	        		} else {
+	        			break;
+	        		}
+	        	}
+	        	inputLine = inputLine.toLowerCase();
+	        	
+	        	//Г Г­Г Г«ГЁГ§ Г±ГІГ°Г®ГЄГЁ (exit Г§Г ГўГҐГ°ГёГ ГҐГІ ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГҐ)
+	        	if (getInputFilePath().equals("EMPTY") && inputLine.equals("exit")) {
+	        		System.out.println("Goodbye! Thanks for using this program!");
+	        		break;
+	        	}
+	        	else {
+	        		//ГЇГ°Г®ГўГҐГ°ГЄГ  Г¤Г«ГЁГ­Г» Г±ГІГ°Г®ГЄГЁ; Г¬ГЁГ­ Г¤Г«ГЁГ­Г  Г±ГІГ°Г®ГЄГЁ ГЇГ°ГЁГ¬ГҐГ°Г  = 7 (A/B*C/D)
+	        		inputLine = inputLine.trim();
+	        		if (inputLine.length() < 7) {
+	        			if (getInputFilePath().equals("EMPTY")) {
+	        				System.out.println("ERROR! Wrong input, string is too short. Try again.");
 	        			} else {
-	        				keyMathOper = "/";
+	        				Element item = resultFile.createElement("mathTask");
+	        				item.setAttribute("ID", Integer.toString(taskNum + 1));
+	        				item.setAttribute("task", inputLine);
+	        				item.setAttribute("result", "Wrong input, string is too short.");
+	        				root.appendChild(item);	
+	        				++taskNum;
 	        			}
-	        			sD1 = inputLine.substring(0, inputLine.indexOf(keyMathOper));
-	        			inputLine = inputLine.substring(inputLine.indexOf(keyMathOper) + 1);
-	        			sD1 = sD1.trim();
-	        			sU2 = inputLine.substring(0, inputLine.indexOf("/"));
-	        			inputLine = inputLine.substring(inputLine.indexOf("/") + 1);
-	        			sU2 = sU2.trim();
-	        			sD2 = inputLine;
-	        			sD2 = sD2.trim();
-	        			//преобразование подстрок в числа (long)
-    					u1 = Long.parseLong(sU1);
-    					d1 = Long.parseLong(sD1);
-    					u2 = Long.parseLong(sU2);
-    					d2 = Long.parseLong(sD2);
-    					//проверка введенных чисел, являются ли они строго положительными
-    					if (u1 <= 0 || d1 <= 0 || u2 <= 0 || d2 <= 0) {
-    						if (getInputFilePath().equals("EMPTY")) {
-    							System.out.println("ERROR! Null of less-than-0-element found. Try again without any element less or equal to 0.");
-    						} else {
-    							Element item = resultFile.createElement("mathTask");
-    	        				item.setAttribute("ID", Integer.toString(taskNum + 1)); // int to string
-    	        				item.setAttribute("task", inputLineCopy);
-    	        				item.setAttribute("result", "Wrong input - elements less or equal to 0 found.");
-    	        				root.appendChild(item);	
-    	        				++taskNum;
-    						}
-    						continue;
-    					}
-    					Fraction left = new Fraction(u1, d1);
-    					Fraction right = new Fraction(u2, d2);
-    					Fraction out = new Fraction();
-    					//выполнение указанной матем.операции
-    					if (keyMathOper == "+") {
-            				out = left.fractSum(right);
-            			} else if (keyMathOper == "-") {
-            				out = left.fractDiff(right);
-            			} else if (keyMathOper == "*") {
-            				out = left.fractMult(right);
-            			} else {
-            				out = left.fractDiv(right);
-            			}
-    					//запись результата в файл либо вывод в консоль
-    					if (getInputFilePath().equals("EMPTY")) {
-    						System.out.println("The result of this math task is " + out.printFraction());
-    					} else {
-    						String printTask = Long.toString(u1) + "/" + Long.toString(d1) + " " + keyMathOper;
-    						printTask = printTask + " " + Long.toString(u2) + "/" + Long.toString(d2);
-    						
-    						Element item = resultFile.createElement("mathTask");
-	        				item.setAttribute("ID", Integer.toString(taskNum + 1)); // int to string
-	        				item.setAttribute("task", printTask);
-	        				item.setAttribute("result", out.printFraction());
-	        				root.appendChild(item);	
-	        				++taskNum;
-    					}
-    				} catch (StringIndexOutOfBoundsException e1) {
-    					//ошибка чтения строки, связанная с некорректным вводом
-    					if (getInputFilePath().equals("EMPTY")) {
-    						System.out.println("ERROR! Incorrect input. Try again according to example 'A/B + C/D'");
-    					} else {
-    						Element item = resultFile.createElement("mathTask");
-	        				item.setAttribute("ID", Integer.toString(taskNum + 1)); // int to string
-	        				item.setAttribute("task", inputLineCopy);
-	        				item.setAttribute("result", "Wrong input - math-task string contains mistakes. Exception: " + e1);
-	        				root.appendChild(item);	
-	        				++taskNum;
-    					}
-    					continue;
-    				} catch (NumberFormatException e2) {
-    					//ошибка, связанная с некорректным преобразованием строки в число (по причине неверного ввода)
-    					if (getInputFilePath().equals("EMPTY")) {
-    						System.out.println("ERROR! Incorrect input. Try again according to example 'A/B + C/D'");
-    					} else {
-    						Element item = resultFile.createElement("mathTask");
-	        				item.setAttribute("ID", Integer.toString(taskNum + 1)); // int to string
-	        				item.setAttribute("task", inputLineCopy);
-	        				item.setAttribute("result", "Wrong input - math-task string contains mistakes. Exception: " + e2);
-	        				root.appendChild(item);	
-	        				++taskNum;
-    					}
-    					continue;
-    				}
-        		}
-        	}
-        } while (true);
+	        			continue;
+	        		}
+	        		else {
+	        			//Г°Г Г§ГЎГ®Г° Г±ГІГ°Г®ГЄГЁ Г­Г  Г·Г Г±ГІГЁ (ГўГЄГ«ГѕГ·Г Гї Г®ГЎГ°Г ГЎГ®ГІГЄГі ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГ©)
+	        			String sU1, sD1, sU2, sD2, inputLineCopy = inputLine;
+	        			long u1, d1, u2, d2;
+	        			String keyMathOper;
+	        			try {
+	        				//Г°Г Г§ГЎГЁГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ Г­Г  ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ
+	        				sU1 = inputLine.substring(0, inputLine.indexOf("/"));
+		        			inputLine = inputLine.substring(inputLine.indexOf("/") + 1);
+		        			sU1 = sU1.trim();
+		        			if (inputLine.indexOf("+") != -1) {
+		        				keyMathOper = "+";
+		        			} else if (inputLine.indexOf("-") != -1) {
+		        				keyMathOper = "-";
+		        			} else if (inputLine.indexOf("*") != -1) {
+		        				keyMathOper = "*";
+		        			} else {
+		        				keyMathOper = "/";
+		        			}
+		        			sD1 = inputLine.substring(0, inputLine.indexOf(keyMathOper));
+		        			inputLine = inputLine.substring(inputLine.indexOf(keyMathOper) + 1);
+		        			sD1 = sD1.trim();
+		        			sU2 = inputLine.substring(0, inputLine.indexOf("/"));
+		        			inputLine = inputLine.substring(inputLine.indexOf("/") + 1);
+		        			sU2 = sU2.trim();
+		        			sD2 = inputLine;
+		        			sD2 = sD2.trim();
+		        			//ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐ ГЇГ®Г¤Г±ГІГ°Г®ГЄ Гў Г·ГЁГ±Г«Г  (long)
+	    					u1 = Long.parseLong(sU1);
+	    					d1 = Long.parseLong(sD1);
+	    					u2 = Long.parseLong(sU2);
+	    					d2 = Long.parseLong(sD2);
+	    					//ГЇГ°Г®ГўГҐГ°ГЄГ  ГўГўГҐГ¤ГҐГ­Г­Г»Гµ Г·ГЁГ±ГҐГ«, ГїГўГ«ГїГѕГІГ±Гї Г«ГЁ Г®Г­ГЁ Г±ГІГ°Г®ГЈГ® ГЇГ®Г«Г®Г¦ГЁГІГҐГ«ГјГ­Г»Г¬ГЁ
+	    					if (u1 <= 0 || d1 <= 0 || u2 <= 0 || d2 <= 0) {
+	    						if (getInputFilePath().equals("EMPTY")) {
+	    							System.out.println("ERROR! Null of less-than-0-element found. Try again without any element less or equal to 0.");
+	    						} else {
+	    							Element item = resultFile.createElement("mathTask");
+		    	        				item.setAttribute("ID", Integer.toString(taskNum + 1));
+		    	        				item.setAttribute("task", inputLineCopy);
+		    	        				item.setAttribute("result", "Wrong input - elements less or equal to 0 found.");
+		    	        				root.appendChild(item);	
+		    	        				++taskNum;
+	    						}
+	    						continue;
+	    					}
+	    					Fraction left = new Fraction(u1, d1);
+	    					Fraction right = new Fraction(u2, d2);
+	    					Fraction out = new Fraction();
+	    					//ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГіГЄГ Г§Г Г­Г­Г®Г© Г¬Г ГІГҐГ¬.Г®ГЇГҐГ°Г Г¶ГЁГЁ
+	    					if (keyMathOper == "+") {
+		            				out = left.fractSum(right);
+		            			} else if (keyMathOper == "-") {
+		            				out = left.fractDiff(right);
+		            			} else if (keyMathOper == "*") {
+		            				out = left.fractMult(right);
+		            			} else {
+		            				out = left.fractDiv(right);
+		            			}
+	    					//Г§Г ГЇГЁГ±Гј Г°ГҐГ§ГіГ«ГјГІГ ГІГ  Гў ГґГ Г©Г« Г«ГЁГЎГ® ГўГ»ГўГ®Г¤ Гў ГЄГ®Г­Г±Г®Г«Гј
+	    					if (getInputFilePath().equals("EMPTY")) {
+	    						System.out.println("The result of this math task is " + out.printFraction());
+	    					} else {
+	    						String printTask = Long.toString(u1) + "/" + Long.toString(d1) + " " + keyMathOper;
+	    						printTask = printTask + " " + Long.toString(u2) + "/" + Long.toString(d2);
+	    						
+	    						Element item = resultFile.createElement("mathTask");
+		        				item.setAttribute("ID", Integer.toString(taskNum + 1));
+		        				item.setAttribute("task", printTask);
+		        				item.setAttribute("result", out.printFraction());
+		        				root.appendChild(item);	
+		        				++taskNum;
+	    					}
+	    				} catch (StringIndexOutOfBoundsException e1) {
+	    					//Г®ГёГЁГЎГЄГ  Г·ГІГҐГ­ГЁГї Г±ГІГ°Г®ГЄГЁ, Г±ГўГїГ§Г Г­Г­Г Гї Г± Г­ГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г¬ ГўГўГ®Г¤Г®Г¬
+	    					if (getInputFilePath().equals("EMPTY")) {
+	    						System.out.println("ERROR! Incorrect input. Try again according to example 'A/B + C/D'");
+	    					} else {
+	    						Element item = resultFile.createElement("mathTask");
+		        				item.setAttribute("ID", Integer.toString(taskNum + 1));
+		        				item.setAttribute("task", inputLineCopy);
+		        				item.setAttribute("result", "Wrong input - math-task string contains mistakes. Exception: " + e1);
+		        				root.appendChild(item);	
+		        				++taskNum;
+	    					}
+	    					continue;
+	    				} catch (NumberFormatException e2) {
+	    					//Г®ГёГЁГЎГЄГ , Г±ГўГїГ§Г Г­Г­Г Гї Г± Г­ГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г¬ ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГҐГ¬ Г±ГІГ°Г®ГЄГЁ Гў Г·ГЁГ±Г«Г® (ГЇГ® ГЇГ°ГЁГ·ГЁГ­ГҐ Г­ГҐГўГҐГ°Г­Г®ГЈГ® ГўГўГ®Г¤Г )
+	    					if (getInputFilePath().equals("EMPTY")) {
+	    						System.out.println("ERROR! Incorrect input. Try again according to example 'A/B + C/D'");
+	    					} else {
+	    						Element item = resultFile.createElement("mathTask");
+		        				item.setAttribute("ID", Integer.toString(taskNum + 1));
+		        				item.setAttribute("task", inputLineCopy);
+		        				item.setAttribute("result", "Wrong input - math-task string contains mistakes. Exception: " + e2);
+		        				root.appendChild(item);	
+		        				++taskNum;
+	    					}
+	    					continue;
+	    				}
+	        		}
+	        	}
+	        } while (true);
 		in.close();
 		
-		//завершение записи выходного файла (в случае ввода через файл)
+		//Г§Г ГўГҐГ°ГёГҐГ­ГЁГҐ Г§Г ГЇГЁГ±ГЁ ГўГ»ГµГ®Г¤Г­Г®ГЈГ® ГґГ Г©Г«Г  (Гў Г±Г«ГіГ·Г ГҐ ГўГўГ®Г¤Г  Г·ГҐГ°ГҐГ§ ГґГ Г©Г«)
 		if (!(getInputFilePath().equals("EMPTY"))) {
 			File file = new File("result.xml"); 
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
