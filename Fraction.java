@@ -1,6 +1,7 @@
 
 public class Fraction {
 	
+	//класс дробей
 	//fields of class Fraction
 	private long upperPart = 1;
 	private long downPart = 1;
@@ -26,10 +27,12 @@ public class Fraction {
 		return fract;
 	}
 	
+	//функция вывода дроби в виде строки
 	public String printFraction() {
 		return (upperPart + "/" + downPart);
 	}
 	
+	//функция суммы дробей
 	public Fraction fractSum(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -64,6 +67,7 @@ public class Fraction {
 		
 	}
 	
+	//функция разности дробей
 	public Fraction fractDiff(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -98,6 +102,7 @@ public class Fraction {
 		
 	}
 	
+	//функция произведения дробей
 	public Fraction fractMult(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -112,6 +117,7 @@ public class Fraction {
 		
 	}
 	
+	//функция частного (деления) дробей
 	public Fraction fractDiv(Fraction right) {
 		
 		Fraction result = new Fraction();
