@@ -1,7 +1,14 @@
+п»їpackage fractionpackage;
 
 public class Fraction {
 	
-	//класс дробей
+	/**
+	 *  Class Fraction contains two fields of Long type - the upper and down part of the fraction. 
+	 *  All mathematical operations, realised in methods, were coded in the following way: output is 
+	 *  the Fraction, but the operation is called by the left operand.
+	 */
+	
+	//РєР»Р°СЃСЃ РґСЂРѕР±РµР№
 	//fields of class Fraction
 	private long upperPart = 1;
 	private long downPart = 1;
@@ -27,12 +34,12 @@ public class Fraction {
 		return fract;
 	}
 	
-	//функция вывода дроби в виде строки
+	//С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РґСЂРѕР±Рё РІ РІРёРґРµ СЃС‚СЂРѕРєРё
 	public String printFraction() {
 		return (upperPart + "/" + downPart);
 	}
 	
-	//функция суммы дробей
+	//С„СѓРЅРєС†РёСЏ СЃСѓРјРјС‹ РґСЂРѕР±РµР№
 	public Fraction fractSum(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -67,7 +74,7 @@ public class Fraction {
 		
 	}
 	
-	//функция разности дробей
+	//С„СѓРЅРєС†РёСЏ СЂР°Р·РЅРѕСЃС‚Рё РґСЂРѕР±РµР№
 	public Fraction fractDiff(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -102,7 +109,7 @@ public class Fraction {
 		
 	}
 	
-	//функция произведения дробей
+	//С„СѓРЅРєС†РёСЏ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РґСЂРѕР±РµР№
 	public Fraction fractMult(Fraction right) {
 		
 		Fraction result = new Fraction();
@@ -117,7 +124,7 @@ public class Fraction {
 		
 	}
 	
-	//функция частного (деления) дробей
+	//С„СѓРЅРєС†РёСЏ С‡Р°СЃС‚РЅРѕРіРѕ (РґРµР»РµРЅРёСЏ) РґСЂРѕР±РµР№
 	public Fraction fractDiv(Fraction right) {
 		
 		Fraction result = new Fraction();

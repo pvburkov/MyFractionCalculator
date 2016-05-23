@@ -1,3 +1,5 @@
+package mycalcpackage;
+import calcworkpackage.CalcWork;
 
 public class MyCalculator {
 
